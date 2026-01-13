@@ -39,9 +39,9 @@ namespace Cmsql.EpiServer.Test.Internal
             PropertyCriteria propertyCriteria = propertyCriteriaCollection.Last();
 
             // Assert
-            propertyCriteria.Value.ShouldBeEquivalentTo(condition.Value);
-            propertyCriteria.Condition.ShouldBeEquivalentTo(CompareCondition.GreaterThan);
-            propertyCriteria.Name.ShouldBeEquivalentTo(condition.Identifier);
+            propertyCriteria.Value.Should().BeEquivalentTo(condition.Value);
+            propertyCriteria.Condition.Should().Be(CompareCondition.GreaterThan);
+            propertyCriteria.Name.Should().BeEquivalentTo(condition.Identifier);
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace Cmsql.EpiServer.Test.Internal
 
             // Assert
             CmsqlQueryExecutionError error = context.Errors.Single();
-            error.Message.ShouldBeEquivalentTo("Could not process malformed query condition.");
+            error.Message.Should().BeEquivalentTo("Could not process malformed query condition.");
         }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace Cmsql.EpiServer.Test.Internal
             
             // Assert
             CmsqlQueryExecutionError error = context.Errors.Single();
-            error.Message.ShouldBeEquivalentTo("Could not find property 'ThisPropertyCannotBeFound'");
+            error.Message.Should().BeEquivalentTo("Could not find property 'ThisPropertyCannotBeFound'");
         }
 
         [Fact]

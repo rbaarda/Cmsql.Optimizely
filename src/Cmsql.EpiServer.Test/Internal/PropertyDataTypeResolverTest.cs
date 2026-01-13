@@ -53,7 +53,7 @@ namespace Cmsql.EpiServer.Test.Internal
 
             // Assert
             successfullyResolvedProperty.Should().BeTrue();
-            resolvedPropertyDataType.ShouldBeEquivalentTo(expectedResult);
+            resolvedPropertyDataType.Should().Be(expectedResult);
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace Cmsql.EpiServer.Test.Internal
 
             // Assert
             successfullyResolvedProperty.Should().BeTrue();
-            resolvedPropertyDataType.ShouldBeEquivalentTo(propertyDataType);
+            resolvedPropertyDataType.Should().Be(propertyDataType);
         }
 
         [Fact]
@@ -100,7 +100,7 @@ namespace Cmsql.EpiServer.Test.Internal
 
             // Assert
             successfullyResolvedProperty.Should().BeFalse();
-            resolvedPropertyDataType.ShouldBeEquivalentTo(PropertyDataType.String);
+            resolvedPropertyDataType.Should().Be(PropertyDataType.String);
         }
     }
 }

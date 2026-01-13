@@ -46,10 +46,10 @@ namespace Cmsql.EpiServer.Test.Internal
 
             // Assert
             isMapSuccessfull.Should().BeTrue();
-            criteria.Name.ShouldBeEquivalentTo(condition.Identifier);
-            criteria.Condition.ShouldBeEquivalentTo(CompareCondition.GreaterThan);
-            criteria.Value.ShouldBeEquivalentTo(condition.Value);
-            criteria.Type.ShouldBeEquivalentTo(PropertyDataType.Number);
+            criteria.Name.Should().BeEquivalentTo(condition.Identifier);
+            criteria.Condition.Should().Be(CompareCondition.GreaterThan);
+            criteria.Value.Should().BeEquivalentTo(condition.Value);
+            criteria.Type.Should().Be(PropertyDataType.Number);
         }
 
         [Fact]
@@ -71,10 +71,10 @@ namespace Cmsql.EpiServer.Test.Internal
 
             // Assert
             isMapSuccessfull.Should().BeTrue();
-            criteria.Name.ShouldBeEquivalentTo(condition.Identifier);
-            criteria.Condition.ShouldBeEquivalentTo(CompareCondition.GreaterThan);
-            criteria.Value.ShouldBeEquivalentTo(condition.Value);
-            criteria.Type.ShouldBeEquivalentTo(PropertyDataType.String);
+            criteria.Name.Should().BeEquivalentTo(condition.Identifier);
+            criteria.Condition.Should().Be(CompareCondition.GreaterThan);
+            criteria.Value.Should().BeEquivalentTo(condition.Value);
+            criteria.Type.Should().Be(PropertyDataType.String);
         }
 
         [Fact]
@@ -127,7 +127,7 @@ namespace Cmsql.EpiServer.Test.Internal
 
             CompareCondition mappedCondition = mapper.MapEqualityOperatorToCompareCondition(operatr);
 
-            mappedCondition.ShouldBeEquivalentTo(condition);
+            mappedCondition.Should().Be(condition);
         }
 
         [Fact]
@@ -138,7 +138,7 @@ namespace Cmsql.EpiServer.Test.Internal
                     new PropertyDataTypeResolver(new ContentType()));
 
             mapper.Invoking(m => m.MapEqualityOperatorToCompareCondition(EqualityOperator.None))
-                .ShouldThrow<InvalidOperationException>();
+                .Should().Throw<InvalidOperationException>();
         }
     }
 }

@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Cmsql.EpiServer.Internal;
+﻿using Cmsql.EpiServer.Internal;
 using Cmsql.Query;
 using Cmsql.Query.Execution;
 using EPiServer;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Cmsql.EpiServer.Test")]
 
 namespace Cmsql.EpiServer
 {
