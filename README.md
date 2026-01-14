@@ -1,4 +1,4 @@
-# Cmsql.EpiServer
+# Cmsql.Optimizely
 This is the Optimizely CMS specific implementation for the [CMSQL - CMS Query Language](https://github.com/rbaarda/Cmsql). Please see the [CMSQL](https://github.com/rbaarda/Cmsql) repository for specifics on the CMS Query Language.
 
 *Please note that this project is a POC and is still in alpha phase.*
