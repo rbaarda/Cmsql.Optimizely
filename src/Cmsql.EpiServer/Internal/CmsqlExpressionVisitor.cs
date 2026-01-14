@@ -2,7 +2,7 @@
 using Cmsql.Query.Execution;
 using EPiServer;
 
-namespace Cmsql.EpiServer.Internal
+namespace Cmsql.Optimizely.Internal
 {
     internal class CmsqlExpressionVisitor : ICmsqlQueryExpressionVisitor
     {

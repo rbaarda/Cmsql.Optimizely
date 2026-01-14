@@ -1,7 +1,7 @@
 ﻿using Cmsql.Query;
 using EPiServer.DataAbstraction;
 
-namespace Cmsql.EpiServer.Internal
+namespace Cmsql.Optimizely.Internal
 {
     internal class CmsqlExpressionParser
     {

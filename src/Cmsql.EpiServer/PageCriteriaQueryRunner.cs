@@ -1,4 +1,4 @@
-﻿using Cmsql.EpiServer.Internal;
+﻿using Cmsql.Optimizely.Internal;
 using Cmsql.Query;
 using Cmsql.Query.Execution;
 using EPiServer;
@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Cmsql.EpiServer.Test")]
+[assembly: InternalsVisibleTo("Cmsql.Optimizely.Test")]
 
-namespace Cmsql.EpiServer
+namespace Cmsql.Optimizely
 {
     public class PageCriteriaQueryRunner : ICmsqlQueryRunner
     {

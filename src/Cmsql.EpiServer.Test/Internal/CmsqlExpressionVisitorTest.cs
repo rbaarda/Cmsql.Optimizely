@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Cmsql.EpiServer.Internal;
+using Cmsql.Optimizely.Internal;
 using Cmsql.Query;
 using Cmsql.Query.Execution;
 using EPiServer;
@@ -9,7 +9,7 @@ using EPiServer.Filters;
 using FluentAssertions;
 using Xunit;
 
-namespace Cmsql.EpiServer.Test.Internal
+namespace Cmsql.Optimizely.Test.Internal
 {
     public class CmsqlExpressionVisitorTest
     {

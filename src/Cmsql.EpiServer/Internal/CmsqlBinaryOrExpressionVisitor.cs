@@ -1,6 +1,6 @@
 ﻿using Cmsql.Query;
 
-namespace Cmsql.EpiServer.Internal
+namespace Cmsql.Optimizely.Internal
 {
     internal class CmsqlBinaryOrExpressionVisitor : CmsqlExpressionVisitor
     {

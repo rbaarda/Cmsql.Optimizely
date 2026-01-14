@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Cmsql.EpiServer.Internal;
+using Cmsql.Optimizely.Internal;
 using EPiServer;
 using EPiServer.DataAbstraction;
 using FluentAssertions;

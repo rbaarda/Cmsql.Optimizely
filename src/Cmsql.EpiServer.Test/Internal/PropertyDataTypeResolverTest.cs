@@ -1,10 +1,10 @@
-﻿using Cmsql.EpiServer.Internal;
+﻿using Cmsql.Optimizely.Internal;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using FluentAssertions;
 using Xunit;
 
-namespace Cmsql.EpiServer.Test.Internal
+namespace Cmsql.Optimizely.Test.Internal
 {
     public class PropertyDataTypeResolverTest
     {

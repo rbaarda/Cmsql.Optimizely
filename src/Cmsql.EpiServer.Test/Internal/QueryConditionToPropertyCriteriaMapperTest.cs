@@ -1,5 +1,5 @@
 ﻿using System;
-using Cmsql.EpiServer.Internal;
+using Cmsql.Optimizely.Internal;
 using Cmsql.Query;
 using EPiServer;
 using EPiServer.Core;
@@ -8,7 +8,7 @@ using EPiServer.Filters;
 using FluentAssertions;
 using Xunit;
 
-namespace Cmsql.EpiServer.Test.Internal
+namespace Cmsql.Optimizely.Test.Internal
 {
     public class QueryConditionToPropertyCriteriaMapperTest
     {

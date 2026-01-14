@@ -1,7 +1,7 @@
 ﻿using Cmsql.Query;
 using EPiServer.Core;
 
-namespace Cmsql.EpiServer
+namespace Cmsql.Optimizely
 {
     public class PageDataCmsqlQueryResult : ICmsqlQueryResult
     {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Cmsql.EpiServer.Internal;
+using Cmsql.Optimizely.Internal;
 using Cmsql.Query;
 using EPiServer;
 using EPiServer.DataAbstraction;

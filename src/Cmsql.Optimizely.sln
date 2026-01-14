@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.1.11312.151 d18.0
+VisualStudioVersion = 18.1.11312.151
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmsql.EpiServer", "Cmsql.EpiServer\Cmsql.EpiServer.csproj", "{C97DA5C5-3BC7-4B9E-8657-96ECB21C0459}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmsql.Optimizely", "Cmsql.EpiServer\Cmsql.Optimizely.csproj", "{C97DA5C5-3BC7-4B9E-8657-96ECB21C0459}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmsql.EpiServer.Test", "Cmsql.EpiServer.Test\Cmsql.EpiServer.Test.csproj", "{5B55CA42-C514-4871-A6C3-551952B78CAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmsql.Optimizely.Test", "Cmsql.EpiServer.Test\Cmsql.Optimizely.Test.csproj", "{5B55CA42-C514-4871-A6C3-551952B78CAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

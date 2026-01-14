@@ -1,4 +1,4 @@
-﻿namespace Cmsql.EpiServer.Test
+﻿namespace Cmsql.Optimizely.Test
 {
     public class PageCriteriaQueryRunnerTest
     {

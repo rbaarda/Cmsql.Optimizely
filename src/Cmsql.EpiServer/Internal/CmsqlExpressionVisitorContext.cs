@@ -7,7 +7,7 @@ using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.Filters;
 
-namespace Cmsql.EpiServer.Internal
+namespace Cmsql.Optimizely.Internal
 {
     internal class CmsqlExpressionVisitorContext
     {
