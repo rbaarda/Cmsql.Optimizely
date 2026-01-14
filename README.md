@@ -1,8 +1,6 @@
 # Cmsql.Optimizely
 This is the Optimizely CMS specific implementation for the [CMSQL - CMS Query Language](https://github.com/rbaarda/Cmsql). Please see the [CMSQL](https://github.com/rbaarda/Cmsql) repository for specifics on the CMS Query Language.
 
-*Please note that this project is a POC and is still in alpha phase.*
-
 ## Getting started
 On its own the Cmsql package can parse Cmsql queries but it needs a specific implementation to execute them.
 This is the [Optimizely CMS](https://www.optimizely.com/products/content-management/) (formerly known as EPiServer) specific implementation which uses the [IPageCriteriaQueryService](https://world.optimizely.com/csclasslibraries/cms/EPiServer.Core.IPageCriteriaQueryService?version=12) at its core. You could say this implementation exposes the `IPageCriteriaQueryService` through the query language.
