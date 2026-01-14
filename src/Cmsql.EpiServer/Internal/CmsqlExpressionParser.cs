@@ -9,7 +9,7 @@ namespace Cmsql.Optimizely.Internal
             ContentType contentType,
             ICmsqlQueryExpression expression)
         {
-            CmsqlExpressionVisitorContext context = new CmsqlExpressionVisitorContext(contentType);
+            var context = new CmsqlExpressionVisitorContext(contentType);
 
             if (contentType == null)
             {
@@ -22,7 +22,7 @@ namespace Cmsql.Optimizely.Internal
                 return context;
             }
             
-            CmsqlExpressionVisitor visitor =
+            var visitor =
                 new CmsqlExpressionVisitor(
                     new QueryConditionToPropertyCriteriaMapper(
                         new PropertyDataTypeResolver(contentType)), context);

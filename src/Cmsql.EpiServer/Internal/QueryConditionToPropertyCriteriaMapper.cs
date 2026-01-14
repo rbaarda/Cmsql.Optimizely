@@ -29,7 +29,7 @@ namespace Cmsql.Optimizely.Internal
                 return false;
             }
 
-            CompareCondition compareCondition = MapEqualityOperatorToCompareCondition(condition.Operator);
+            var compareCondition = MapEqualityOperatorToCompareCondition(condition.Operator);
             criteria = new PropertyCriteria
             {
                 Condition = compareCondition,
@@ -42,21 +42,16 @@ namespace Cmsql.Optimizely.Internal
             return true;
         }
 
-        internal CompareCondition MapEqualityOperatorToCompareCondition(EqualityOperator operatr)
+        internal static CompareCondition MapEqualityOperatorToCompareCondition(EqualityOperator operatr)
         {
-            switch (operatr)
+            return operatr switch
             {
-                case EqualityOperator.Equals:
-                    return CompareCondition.Equal;
-                case EqualityOperator.GreaterThan:
-                    return CompareCondition.GreaterThan;
-                case EqualityOperator.LessThan:
-                    return CompareCondition.LessThan;
-                case EqualityOperator.NotEquals:
-                    return CompareCondition.NotEqual;
-            }
-
-            throw new InvalidOperationException($"Equality operator '{operatr}' not supported.");
+                EqualityOperator.Equals => CompareCondition.Equal,
+                EqualityOperator.GreaterThan => CompareCondition.GreaterThan,
+                EqualityOperator.LessThan => CompareCondition.LessThan,
+                EqualityOperator.NotEquals => CompareCondition.NotEqual,
+                _ => throw new InvalidOperationException($"Equality operator '{operatr}' not supported."),
+            };
         }
     }
 }

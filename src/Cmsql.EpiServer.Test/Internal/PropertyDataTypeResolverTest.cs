@@ -45,7 +45,7 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_can_resolve_meta_data_property_type(string propertyName, PropertyDataType expectedResult)
         {
             // Arrange
-            PropertyDataTypeResolver resolver = new PropertyDataTypeResolver(null);
+            var resolver = new PropertyDataTypeResolver(null);
 
             // Act
             bool successfullyResolvedProperty =
@@ -63,14 +63,14 @@ namespace Cmsql.Optimizely.Test.Internal
             const string propertyName = "TestProperty";
             const PropertyDataType propertyDataType = PropertyDataType.Boolean;
 
-            ContentType contentType = new ContentType();
+            var contentType = new ContentType();
             contentType.PropertyDefinitions.Add(new PropertyDefinition
             {
                 Name = propertyName,
                 Type = new PropertyDefinitionType(1, propertyDataType, "Boolean")
             });
 
-            PropertyDataTypeResolver resolver = new PropertyDataTypeResolver(contentType);
+            var resolver = new PropertyDataTypeResolver(contentType);
 
             // Act
             bool successfullyResolvedProperty =
@@ -85,14 +85,14 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_when_property_type_cannot_be_resolved_should_return_false()
         {
             // Arrange
-            ContentType contentType = new ContentType();
+            var contentType = new ContentType();
             contentType.PropertyDefinitions.Add(new PropertyDefinition
             {
                 Name = "TestProperty",
                 Type = new PropertyDefinitionType(1, PropertyDataType.Boolean, "Boolean")
             });
 
-            PropertyDataTypeResolver resolver = new PropertyDataTypeResolver(contentType);
+            var resolver = new PropertyDataTypeResolver(contentType);
 
             // Act
             bool successfullyResolvedProperty =

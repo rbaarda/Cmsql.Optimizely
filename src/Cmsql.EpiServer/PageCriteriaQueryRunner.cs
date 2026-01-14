@@ -1,7 +1,6 @@
 ﻿using Cmsql.Optimizely.Internal;
 using Cmsql.Query;
 using Cmsql.Query.Execution;
-using EPiServer;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using System.Collections.Generic;
@@ -27,36 +26,36 @@ namespace Cmsql.Optimizely
 
         public CmsqlQueryExecutionResult ExecuteQueries(IEnumerable<CmsqlQuery> queries)
         {
-            List<CmsqlQueryExecutionError> errors = new List<CmsqlQueryExecutionError>();
-            List<PageData> result = new List<PageData>();
+            var errors = new List<CmsqlQueryExecutionError>();
+            var result = new List<PageData>();
 
-            CmsqlExpressionParser expressionParser = new CmsqlExpressionParser();
+            var expressionParser = new CmsqlExpressionParser();
             foreach (CmsqlQuery query in queries)
             {
-                ContentType contentType = _contentTypeRepository.Load(query.ContentType);
+                var contentType = _contentTypeRepository.Load(query.ContentType);
                 if (contentType == null)
                 {
                     errors.Add(new CmsqlQueryExecutionError($"Couldn't load content-type '{query.ContentType}'."));
                     continue;
                 }
 
-                CmsqlExpressionVisitorContext visitorContext = expressionParser.Parse(contentType, query.Criteria);
+                var visitorContext = expressionParser.Parse(contentType, query.Criteria);
                 if (visitorContext.Errors.Any())
                 {
                     errors.AddRange(visitorContext.Errors);
                     continue;
                 }
 
-                PageReference searchStartNodeRef = GetStartSearchFromNode(query.StartNode);
+                var searchStartNodeRef = GetStartSearchFromNode(query.StartNode);
                 if (PageReference.IsNullOrEmpty(searchStartNodeRef))
                 {
                     errors.Add(new CmsqlQueryExecutionError($"Couldn't process start node '{query.StartNode}'."));
                     continue;
                 }
 
-                foreach (PropertyCriteriaCollection propertyCriteriaCollection in visitorContext.GetCriteria())
+                foreach (var propertyCriteriaCollection in visitorContext.GetCriteria())
                 {
-                    PageDataCollection foundPages = _pageCriteriaQueryService.FindPagesWithCriteria(
+                    var foundPages = _pageCriteriaQueryService.FindPagesWithCriteria(
                         searchStartNodeRef,
                         propertyCriteriaCollection);
                     if (foundPages != null && foundPages.Any())
@@ -66,13 +65,13 @@ namespace Cmsql.Optimizely
                 }
             }
 
-            IEnumerable<ICmsqlQueryResult> pageDataCmsqlQueryResults =
+            var pageDataCmsqlQueryResults =
                 result.Select(p => new PageDataCmsqlQueryResult(p)).ToList();
 
             return new CmsqlQueryExecutionResult(pageDataCmsqlQueryResults, errors);
         }
 
-        private PageReference GetStartSearchFromNode(CmsqlQueryStartNode startNode)
+        private static PageReference GetStartSearchFromNode(CmsqlQueryStartNode startNode)
         {
             switch (startNode.StartNodeType)
             {
@@ -87,6 +86,7 @@ namespace Cmsql.Optimizely
                     }
                     break;
             }
+
             return PageReference.EmptyReference;
         }
     }

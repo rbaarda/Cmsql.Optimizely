@@ -38,7 +38,7 @@ namespace Cmsql.Optimizely.Internal
 
         public virtual void VisitQueryExpression(CmsqlQueryBinaryExpression binaryExpression)
         {
-            CmsqlExpressionVisitor visitor = binaryExpression.Operator == ConditionalOperator.Or
+            var visitor = binaryExpression.Operator == ConditionalOperator.Or
                 ? new CmsqlBinaryOrExpressionVisitor(_conditionToCriteriaMapper, Context)
                 : new CmsqlExpressionVisitor(_conditionToCriteriaMapper, Context);
 

@@ -125,7 +125,7 @@ namespace Cmsql.Optimizely.Test.Internal
                 new QueryConditionToPropertyCriteriaMapper(
                     new PropertyDataTypeResolver(new ContentType()));
 
-            CompareCondition mappedCondition = mapper.MapEqualityOperatorToCompareCondition(operatr);
+            CompareCondition mappedCondition = QueryConditionToPropertyCriteriaMapper.MapEqualityOperatorToCompareCondition(operatr);
 
             mappedCondition.Should().Be(condition);
         }
@@ -137,7 +137,7 @@ namespace Cmsql.Optimizely.Test.Internal
                 new QueryConditionToPropertyCriteriaMapper(
                     new PropertyDataTypeResolver(new ContentType()));
 
-            mapper.Invoking(m => m.MapEqualityOperatorToCompareCondition(EqualityOperator.None))
+            mapper.Invoking(m => QueryConditionToPropertyCriteriaMapper.MapEqualityOperatorToCompareCondition(EqualityOperator.None))
                 .Should().Throw<InvalidOperationException>();
         }
     }

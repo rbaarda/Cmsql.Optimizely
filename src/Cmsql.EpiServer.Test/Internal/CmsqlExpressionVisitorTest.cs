@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Cmsql.Optimizely.Internal;
+﻿using Cmsql.Optimizely.Internal;
 using Cmsql.Query;
-using Cmsql.Query.Execution;
-using EPiServer;
 using EPiServer.DataAbstraction;
 using EPiServer.Filters;
 using FluentAssertions;
+using System.Linq;
 using Xunit;
 
 namespace Cmsql.Optimizely.Test.Internal
@@ -17,16 +14,16 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_can_map_query_condition_to_property_criteria()
         {
             // Arrange
-            CmsqlQueryCondition condition = new CmsqlQueryCondition
+            var condition = new CmsqlQueryCondition
             {
                 Identifier = "PageName",
                 Operator = EqualityOperator.GreaterThan,
                 Value = "5"
             };
             
-            CmsqlExpressionVisitorContext context = new CmsqlExpressionVisitorContext(new ContentType());
+            var context = new CmsqlExpressionVisitorContext(new ContentType());
 
-            CmsqlExpressionVisitor cmsqlExpressionVisitor =
+            var cmsqlExpressionVisitor =
                 new CmsqlExpressionVisitor(
                     new QueryConditionToPropertyCriteriaMapper(
                         new PropertyDataTypeResolver(new ContentType())), context);
@@ -34,9 +31,9 @@ namespace Cmsql.Optimizely.Test.Internal
             // Act
             cmsqlExpressionVisitor.VisitQueryCondition(condition);
 
-            PropertyCriteriaCollection propertyCriteriaCollection = context.GetCriteria().Single();
+            var propertyCriteriaCollection = context.GetCriteria().Single();
 
-            PropertyCriteria propertyCriteria = propertyCriteriaCollection.Last();
+            var propertyCriteria = propertyCriteriaCollection.Last();
 
             // Assert
             propertyCriteria.Value.Should().BeEquivalentTo(condition.Value);
@@ -48,9 +45,9 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_when_condition_is_null_criteria_should_be_empty()
         {
             // Arrange
-            CmsqlExpressionVisitorContext context = new CmsqlExpressionVisitorContext(new ContentType());
+            var context = new CmsqlExpressionVisitorContext(new ContentType());
 
-            CmsqlExpressionVisitor cmsqlExpressionVisitor =
+            var cmsqlExpressionVisitor =
                 new CmsqlExpressionVisitor(
                     new QueryConditionToPropertyCriteriaMapper(
                         new PropertyDataTypeResolver(new ContentType())), context);
@@ -58,7 +55,7 @@ namespace Cmsql.Optimizely.Test.Internal
             // Act
             cmsqlExpressionVisitor.VisitQueryCondition(null);
 
-            IEnumerable<PropertyCriteriaCollection> propertyCriteriaCollection = context.GetCriteria();
+            var propertyCriteriaCollection = context.GetCriteria();
             
             // Assert
             propertyCriteriaCollection.Should().BeEmpty();
@@ -68,9 +65,9 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_when_condition_is_null_context_should_contain_error()
         {
             // Arrange
-            CmsqlExpressionVisitorContext context = new CmsqlExpressionVisitorContext(new ContentType());
+            var context = new CmsqlExpressionVisitorContext(new ContentType());
 
-            CmsqlExpressionVisitor cmsqlExpressionVisitor =
+            var cmsqlExpressionVisitor =
                 new CmsqlExpressionVisitor(
                     new QueryConditionToPropertyCriteriaMapper(
                         new PropertyDataTypeResolver(new ContentType())), context);
@@ -79,7 +76,7 @@ namespace Cmsql.Optimizely.Test.Internal
             cmsqlExpressionVisitor.VisitQueryCondition(null);
 
             // Assert
-            CmsqlQueryExecutionError error = context.Errors.Single();
+            var error = context.Errors.Single();
             error.Message.Should().BeEquivalentTo("Could not process malformed query condition.");
         }
 
@@ -87,16 +84,16 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_when_property_cannot_be_resolved_context_should_contain_error()
         {
             // Arrange
-            CmsqlQueryCondition condition = new CmsqlQueryCondition
+            var condition = new CmsqlQueryCondition
             {
                 Identifier = "ThisPropertyCannotBeFound",
                 Operator = EqualityOperator.GreaterThan,
                 Value = "5"
             };
 
-            CmsqlExpressionVisitorContext context = new CmsqlExpressionVisitorContext(new ContentType());
+            var context = new CmsqlExpressionVisitorContext(new ContentType());
 
-            CmsqlExpressionVisitor cmsqlExpressionVisitor =
+            var cmsqlExpressionVisitor =
                 new CmsqlExpressionVisitor(
                     new QueryConditionToPropertyCriteriaMapper(
                         new PropertyDataTypeResolver(new ContentType())), context);
@@ -105,7 +102,7 @@ namespace Cmsql.Optimizely.Test.Internal
             cmsqlExpressionVisitor.VisitQueryCondition(condition);
             
             // Assert
-            CmsqlQueryExecutionError error = context.Errors.Single();
+            var error = context.Errors.Single();
             error.Message.Should().BeEquivalentTo("Could not find property 'ThisPropertyCannotBeFound'");
         }
 
@@ -113,16 +110,16 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_when_condition_cannot_be_mapped_criteria_should_be_empty()
         {
             // Arrange
-            CmsqlQueryCondition condition = new CmsqlQueryCondition
+            var condition = new CmsqlQueryCondition
             {
                 Identifier = "ThisPropertyCannotBeFound",
                 Operator = EqualityOperator.GreaterThan,
                 Value = "5"
             };
 
-            CmsqlExpressionVisitorContext context = new CmsqlExpressionVisitorContext(new ContentType());
+            var context = new CmsqlExpressionVisitorContext(new ContentType());
 
-            CmsqlExpressionVisitor cmsqlExpressionVisitor =
+            var cmsqlExpressionVisitor =
                 new CmsqlExpressionVisitor(
                     new QueryConditionToPropertyCriteriaMapper(
                         new PropertyDataTypeResolver(new ContentType())), context);
@@ -130,7 +127,7 @@ namespace Cmsql.Optimizely.Test.Internal
             // Act
             cmsqlExpressionVisitor.VisitQueryCondition(condition);
 
-            IEnumerable<PropertyCriteriaCollection> propertyCriteriaCollection = context.GetCriteria();
+            var propertyCriteriaCollection = context.GetCriteria();
 
             // Assert
             propertyCriteriaCollection.Should().BeEmpty();
@@ -140,7 +137,7 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_can_map_binary_orexpression_to_two_criteria_collections()
         {
             // Arrange
-            CmsqlQueryBinaryExpression orExpression = new CmsqlQueryBinaryExpression
+            var orExpression = new CmsqlQueryBinaryExpression
             {
                 Operator = ConditionalOperator.Or,
                 LeftExpression = new CmsqlQueryCondition
@@ -157,9 +154,9 @@ namespace Cmsql.Optimizely.Test.Internal
                 }
             };
 
-            CmsqlExpressionVisitorContext context = new CmsqlExpressionVisitorContext(new ContentType());
+            var context = new CmsqlExpressionVisitorContext(new ContentType());
 
-            CmsqlExpressionVisitor cmsqlExpressionVisitor =
+            var cmsqlExpressionVisitor =
                 new CmsqlExpressionVisitor(
                     new QueryConditionToPropertyCriteriaMapper(
                         new PropertyDataTypeResolver(new ContentType())), context);
@@ -167,7 +164,7 @@ namespace Cmsql.Optimizely.Test.Internal
             // Act
             cmsqlExpressionVisitor.VisitQueryExpression(orExpression);
 
-            IEnumerable<PropertyCriteriaCollection> propertyCriteriaCollection = context.GetCriteria();
+            var propertyCriteriaCollection = context.GetCriteria();
 
             // Assert
             propertyCriteriaCollection.Should().HaveCount(2);
@@ -177,7 +174,7 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_can_map_binary_andexpression_to_one_criteria_collections()
         {
             // Arrange
-            CmsqlQueryBinaryExpression orExpression = new CmsqlQueryBinaryExpression
+            var orExpression = new CmsqlQueryBinaryExpression
             {
                 Operator = ConditionalOperator.And,
                 LeftExpression = new CmsqlQueryCondition
@@ -194,9 +191,9 @@ namespace Cmsql.Optimizely.Test.Internal
                 }
             };
 
-            CmsqlExpressionVisitorContext context = new CmsqlExpressionVisitorContext(new ContentType());
+            var context = new CmsqlExpressionVisitorContext(new ContentType());
 
-            CmsqlExpressionVisitor cmsqlExpressionVisitor =
+            var cmsqlExpressionVisitor =
                 new CmsqlExpressionVisitor(
                     new QueryConditionToPropertyCriteriaMapper(
                         new PropertyDataTypeResolver(new ContentType())), context);
@@ -204,7 +201,7 @@ namespace Cmsql.Optimizely.Test.Internal
             // Act
             cmsqlExpressionVisitor.VisitQueryExpression(orExpression);
 
-            IEnumerable<PropertyCriteriaCollection> propertyCriteriaCollection = context.GetCriteria();
+            var propertyCriteriaCollection = context.GetCriteria();
 
             // Assert
             propertyCriteriaCollection.Should().HaveCount(1);
@@ -214,7 +211,7 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_can_map_nested_expressions()
         {
             // Arrange
-            CmsqlQueryBinaryExpression expressions = new CmsqlQueryBinaryExpression
+            var expressions = new CmsqlQueryBinaryExpression
             {
                 Operator = ConditionalOperator.Or,
                 LeftExpression = new CmsqlQueryBinaryExpression
@@ -281,9 +278,9 @@ namespace Cmsql.Optimizely.Test.Internal
                 }
             };
 
-            CmsqlExpressionVisitorContext context = new CmsqlExpressionVisitorContext(new ContentType());
+            var context = new CmsqlExpressionVisitorContext(new ContentType());
 
-            CmsqlExpressionVisitor cmsqlExpressionVisitor =
+            var cmsqlExpressionVisitor =
                 new CmsqlExpressionVisitor(
                     new QueryConditionToPropertyCriteriaMapper(
                         new PropertyDataTypeResolver(new ContentType())), context);
@@ -291,7 +288,7 @@ namespace Cmsql.Optimizely.Test.Internal
             // Act
             cmsqlExpressionVisitor.VisitQueryExpression(expressions);
 
-            IEnumerable<PropertyCriteriaCollection> propertyCriteriaCollection = context.GetCriteria();
+            var propertyCriteriaCollection = context.GetCriteria();
 
             // Assert
             propertyCriteriaCollection.Should().HaveCount(6);

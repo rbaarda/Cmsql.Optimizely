@@ -60,13 +60,13 @@ namespace Cmsql.Optimizely.Internal
             Debug.Assert(!string.IsNullOrWhiteSpace(propertyIdentifier));
 
             propertyDataType = PropertyDataType.String;
-            if (MetaDataPropertyTypeMappings.ContainsKey(propertyIdentifier))
+            if (MetaDataPropertyTypeMappings.TryGetValue(propertyIdentifier, out PropertyDataType value))
             {
-                propertyDataType = MetaDataPropertyTypeMappings[propertyIdentifier];
+                propertyDataType = value;
                 return true;
             }
 
-            PropertyDefinition propDef = _contentType
+            var propDef = _contentType
                 .PropertyDefinitions
                 .SingleOrDefault(prop =>
                     prop.Name.Equals(propertyIdentifier, StringComparison.InvariantCultureIgnoreCase));
