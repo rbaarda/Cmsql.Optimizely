@@ -21,11 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cmsql.EpiServer\Cmsql.Optimizely.csproj" />
+    <Folder Include="Properties\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <ProjectReference Include="..\Cmsql.Optimizely\Cmsql.Optimizely.csproj" />
   </ItemGroup>
 
 </Project>
