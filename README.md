@@ -8,9 +8,9 @@ On its own the Cmsql package can parse Cmsql queries but it needs a specific imp
 This is the [Optimizely CMS](https://www.optimizely.com/products/content-management/) (formerly known as EPiServer) specific implementation which uses the [IPageCriteriaQueryService](https://world.optimizely.com/csclasslibraries/cms/EPiServer.Core.IPageCriteriaQueryService?version=12) at its core. You could say this implementation exposes the `IPageCriteriaQueryService` through the query language.
 
 ### Installation
-You can install the NuGet package by running the following command (Please note that this is a pre-release).
+You can install the NuGet package by running the following command:
 
-`Install-Package Cmsql.Optimizely -Version 1.0.0`
+`dotnet add package Cmsql.Optimizely --version 1.0.0`
 
 ### Usage
 The Cmsql package contains a `CmsqlQueryService` which is basically a facade that takes care of parsing and executing queries through the `ExecuteQuery` method.
