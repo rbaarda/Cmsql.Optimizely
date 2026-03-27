@@ -53,7 +53,7 @@ namespace Cmsql.Optimizely.Test.Internal
                         new PropertyDataTypeResolver(new ContentType())), context);
 
             // Act
-            cmsqlExpressionVisitor.VisitQueryCondition(null);
+            cmsqlExpressionVisitor.VisitQueryCondition(null!);
 
             var propertyCriteriaCollection = context.GetCriteria();
             
@@ -73,7 +73,7 @@ namespace Cmsql.Optimizely.Test.Internal
                         new PropertyDataTypeResolver(new ContentType())), context);
 
             // Act
-            cmsqlExpressionVisitor.VisitQueryCondition(null);
+            cmsqlExpressionVisitor.VisitQueryCondition(null!);
 
             // Assert
             var error = context.Errors.Single();

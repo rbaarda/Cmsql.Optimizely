@@ -12,11 +12,11 @@ namespace Cmsql.Optimizely.Internal
     internal class CmsqlExpressionVisitorContext
     {
         private readonly Stack<PropertyCriteriaCollection> _propertyCriteriaCollectionStack;
-        private readonly ContentType _contentType;
+        private readonly ContentType? _contentType;
 
         internal IList<CmsqlQueryExecutionError> Errors { get; }
 
-        internal CmsqlExpressionVisitorContext(ContentType contentType)
+        internal CmsqlExpressionVisitorContext(ContentType? contentType)
         {
             _propertyCriteriaCollectionStack = new Stack<PropertyCriteriaCollection>();
             _contentType = contentType;
@@ -48,7 +48,7 @@ namespace Cmsql.Optimizely.Internal
                 Name = MetaDataProperties.PageTypeID,
                 Required = true,
                 Type = PropertyDataType.PageType,
-                Value = _contentType.ID.ToString()
+                Value = _contentType!.ID.ToString()
             });
         }
 

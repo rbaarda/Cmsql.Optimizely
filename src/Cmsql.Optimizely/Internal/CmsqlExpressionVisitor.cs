@@ -18,7 +18,7 @@ namespace Cmsql.Optimizely.Internal
             Context = context;
         }
 
-        public virtual void VisitQueryCondition(CmsqlQueryCondition condition)
+        public virtual void VisitQueryCondition(CmsqlQueryCondition? condition)
         {
             if (condition == null)
             {
@@ -26,9 +26,9 @@ namespace Cmsql.Optimizely.Internal
                 return;
             }
 
-            if (_conditionToCriteriaMapper.TryMap(condition, out PropertyCriteria criteria))
+            if (_conditionToCriteriaMapper.TryMap(condition, out PropertyCriteria? criteria))
             {
-                Context.AddPropertyCriteria(criteria);
+                Context.AddPropertyCriteria(criteria!);
             }
             else
             {

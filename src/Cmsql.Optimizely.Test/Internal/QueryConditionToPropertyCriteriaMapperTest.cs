@@ -42,11 +42,11 @@ namespace Cmsql.Optimizely.Test.Internal
                 new PropertyDataTypeResolver(contentType));
 
             // Act
-            bool isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria criteria);
+            bool isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria? criteria);
 
             // Assert
             isMapSuccessfull.Should().BeTrue();
-            criteria.Name.Should().BeEquivalentTo(condition.Identifier);
+            criteria!.Name.Should().BeEquivalentTo(condition.Identifier);
             criteria.Condition.Should().Be(CompareCondition.GreaterThan);
             criteria.Value.Should().BeEquivalentTo(condition.Value);
             criteria.Type.Should().Be(PropertyDataType.Number);
@@ -67,11 +67,11 @@ namespace Cmsql.Optimizely.Test.Internal
                 new PropertyDataTypeResolver(new ContentType()));
 
             // Act
-            bool isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria criteria);
+            bool isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria? criteria);
 
             // Assert
             isMapSuccessfull.Should().BeTrue();
-            criteria.Name.Should().BeEquivalentTo(condition.Identifier);
+            criteria!.Name.Should().BeEquivalentTo(condition.Identifier);
             criteria.Condition.Should().Be(CompareCondition.GreaterThan);
             criteria.Value.Should().BeEquivalentTo(condition.Value);
             criteria.Type.Should().Be(PropertyDataType.String);
@@ -85,7 +85,7 @@ namespace Cmsql.Optimizely.Test.Internal
                 new PropertyDataTypeResolver(new ContentType()));
 
             // Act
-            bool isMapSuccessfull = mapper.TryMap(null, out PropertyCriteria criteria);
+            bool isMapSuccessfull = mapper.TryMap(null!, out PropertyCriteria? criteria);
 
             // Assert
             isMapSuccessfull.Should().BeFalse();
@@ -107,7 +107,7 @@ namespace Cmsql.Optimizely.Test.Internal
                 new PropertyDataTypeResolver(new ContentType()));
 
             // Act
-            bool isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria criteria);
+            bool isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria? criteria);
 
             // Assert
             isMapSuccessfull.Should().BeFalse();

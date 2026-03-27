@@ -6,8 +6,8 @@ namespace Cmsql.Optimizely.Internal
     internal class CmsqlExpressionParser
     {
         public CmsqlExpressionVisitorContext Parse(
-            ContentType contentType,
-            ICmsqlQueryExpression expression)
+            ContentType? contentType,
+            ICmsqlQueryExpression? expression)
         {
             var context = new CmsqlExpressionVisitorContext(contentType);
 

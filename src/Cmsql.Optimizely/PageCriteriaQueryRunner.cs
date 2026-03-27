@@ -66,7 +66,9 @@ namespace Cmsql.Optimizely
             }
 
             var pageDataCmsqlQueryResults =
-                result.Select(p => new PageDataCmsqlQueryResult(p)).ToList();
+                result.DistinctBy(p => p.PageLink?.ID)
+                      .Select(p => new PageDataCmsqlQueryResult(p))
+                      .ToList();
 
             return new CmsqlQueryExecutionResult(pageDataCmsqlQueryResults, errors);
         }

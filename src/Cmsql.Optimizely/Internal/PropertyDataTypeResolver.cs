@@ -68,7 +68,7 @@ namespace Cmsql.Optimizely.Internal
 
             var propDef = _contentType
                 .PropertyDefinitions
-                .SingleOrDefault(prop =>
+                .FirstOrDefault(prop =>
                     prop.Name.Equals(propertyIdentifier, StringComparison.InvariantCultureIgnoreCase));
             if (propDef != null)
             {

@@ -11,7 +11,7 @@ namespace Cmsql.Optimizely.Internal
         {
         }
 
-        public override void VisitQueryCondition(CmsqlQueryCondition condition)
+        public override void VisitQueryCondition(CmsqlQueryCondition? condition)
         {
             Context.PushNewPropertyCriteriaCollection();
 

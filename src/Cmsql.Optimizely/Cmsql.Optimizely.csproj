@@ -6,7 +6,7 @@
         <AssemblyName>Cmsql.Optimizely</AssemblyName>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <ImplicitUsings>disable</ImplicitUsings>
-        <Nullable>disable</Nullable>
+        <Nullable>enable</Nullable>
 
         <!-- NuGet package metadata -->
         <PackageId>Cmsql.Optimizely</PackageId>

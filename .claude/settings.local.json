@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet test:*)",
+      "Bash(dotnet package:*)",
+      "Bash(dotnet nuget:*)",
+      "Read(//d/dev/personal/Cmsql.Optimizely/src/$USERPROFILE/.nuget/packages/**)",
+      "Read(//c/Users/RobertBaarda/.nuget/packages/moq/**)",
+      "Bash(dotnet build:*)",
+      "Bash(powershell -Command \"Add-Type -Path ''''C:/Users/RobertBaarda/.nuget/packages/episerver.cms.core/12.0.3/lib/net5.0/EPiServer.dll''''; [System.AppDomain]::CurrentDomain.GetAssemblies\\(\\) | Where-Object { $_FullName -like ''''*EPiServer*'''' } | ForEach-Object { $_GetTypes\\(\\) } | Where-Object { $_Name -eq ''''PropertyCriteriaCollection'''' } | Select-Object FullName, Namespace\")"
+    ]
+  }
+}

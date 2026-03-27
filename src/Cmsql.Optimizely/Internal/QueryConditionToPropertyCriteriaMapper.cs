@@ -15,7 +15,7 @@ namespace Cmsql.Optimizely.Internal
             _propertyDataTypeResolver = propertyDataTypeResolver;
         }
 
-        internal bool TryMap(CmsqlQueryCondition condition, out PropertyCriteria criteria)
+        internal bool TryMap(CmsqlQueryCondition? condition, out PropertyCriteria? criteria)
         {
             criteria = null;
 

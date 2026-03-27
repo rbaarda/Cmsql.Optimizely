@@ -45,7 +45,7 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_can_resolve_meta_data_property_type(string propertyName, PropertyDataType expectedResult)
         {
             // Arrange
-            var resolver = new PropertyDataTypeResolver(null);
+            var resolver = new PropertyDataTypeResolver(null!);
 
             // Act
             bool successfullyResolvedProperty =
