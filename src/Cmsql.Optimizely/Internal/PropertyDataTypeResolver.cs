@@ -60,7 +60,7 @@ namespace Cmsql.Optimizely.Internal
             Debug.Assert(!string.IsNullOrWhiteSpace(propertyIdentifier));
 
             propertyDataType = PropertyDataType.String;
-            if (MetaDataPropertyTypeMappings.TryGetValue(propertyIdentifier, out PropertyDataType value))
+            if (MetaDataPropertyTypeMappings.TryGetValue(propertyIdentifier, out var value))
             {
                 propertyDataType = value;
                 return true;

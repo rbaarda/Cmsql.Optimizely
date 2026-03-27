@@ -48,8 +48,8 @@ namespace Cmsql.Optimizely.Test.Internal
             var resolver = new PropertyDataTypeResolver(null!);
 
             // Act
-            bool successfullyResolvedProperty =
-                resolver.TryResolve(propertyName, out PropertyDataType resolvedPropertyDataType);
+            var successfullyResolvedProperty =
+                resolver.TryResolve(propertyName, out var resolvedPropertyDataType);
 
             // Assert
             successfullyResolvedProperty.Should().BeTrue();
@@ -73,8 +73,8 @@ namespace Cmsql.Optimizely.Test.Internal
             var resolver = new PropertyDataTypeResolver(contentType);
 
             // Act
-            bool successfullyResolvedProperty =
-                resolver.TryResolve(propertyName, out PropertyDataType resolvedPropertyDataType);
+            var successfullyResolvedProperty =
+                resolver.TryResolve(propertyName, out var resolvedPropertyDataType);
 
             // Assert
             successfullyResolvedProperty.Should().BeTrue();
@@ -95,8 +95,8 @@ namespace Cmsql.Optimizely.Test.Internal
             var resolver = new PropertyDataTypeResolver(contentType);
 
             // Act
-            bool successfullyResolvedProperty =
-                resolver.TryResolve("ThisPropertyDoesntExist", out PropertyDataType resolvedPropertyDataType);
+            var successfullyResolvedProperty =
+                resolver.TryResolve("ThisPropertyDoesntExist", out var resolvedPropertyDataType);
 
             // Assert
             successfullyResolvedProperty.Should().BeFalse();

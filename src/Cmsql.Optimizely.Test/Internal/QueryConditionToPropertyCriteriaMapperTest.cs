@@ -16,7 +16,7 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_can_map_query_condition_to_property_criteria()
         {
             // Arrange
-            ContentType contentType = new ContentType
+            var contentType = new ContentType
             {
                 PropertyDefinitions =
                 {
@@ -31,18 +31,18 @@ namespace Cmsql.Optimizely.Test.Internal
                 }
             };
 
-            CmsqlQueryCondition condition = new CmsqlQueryCondition
+            var condition = new CmsqlQueryCondition
             {
                 Identifier = "FooBar",
                 Operator = EqualityOperator.GreaterThan,
                 Value = "5"
             };
 
-            QueryConditionToPropertyCriteriaMapper mapper = new QueryConditionToPropertyCriteriaMapper(
+            var mapper = new QueryConditionToPropertyCriteriaMapper(
                 new PropertyDataTypeResolver(contentType));
 
             // Act
-            bool isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria? criteria);
+            var isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria? criteria);
 
             // Assert
             isMapSuccessfull.Should().BeTrue();
@@ -56,18 +56,18 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_can_map_query_condition_with_meta_data_property_to_property_criteria()
         {
             // Arrange
-            CmsqlQueryCondition condition = new CmsqlQueryCondition
+            var condition = new CmsqlQueryCondition
             {
                 Identifier = MetaDataProperties.PageName,
                 Operator = EqualityOperator.GreaterThan,
                 Value = "5"
             };
 
-            QueryConditionToPropertyCriteriaMapper mapper = new QueryConditionToPropertyCriteriaMapper(
+            var mapper = new QueryConditionToPropertyCriteriaMapper(
                 new PropertyDataTypeResolver(new ContentType()));
 
             // Act
-            bool isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria? criteria);
+            var isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria? criteria);
 
             // Assert
             isMapSuccessfull.Should().BeTrue();
@@ -81,11 +81,11 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_when_condition_is_null_mapping_should_return_false()
         {
             // Arrange
-            QueryConditionToPropertyCriteriaMapper mapper = new QueryConditionToPropertyCriteriaMapper(
+            var mapper = new QueryConditionToPropertyCriteriaMapper(
                 new PropertyDataTypeResolver(new ContentType()));
 
             // Act
-            bool isMapSuccessfull = mapper.TryMap(null!, out PropertyCriteria? criteria);
+            var isMapSuccessfull = mapper.TryMap(null!, out PropertyCriteria? criteria);
 
             // Assert
             isMapSuccessfull.Should().BeFalse();
@@ -96,18 +96,18 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_when_property_is_unkown_mapping_should_return_false()
         {
             // Arrange
-            CmsqlQueryCondition condition = new CmsqlQueryCondition
+            var condition = new CmsqlQueryCondition
             {
                 Identifier = "This is some unknown property",
                 Operator = EqualityOperator.GreaterThan,
                 Value = "5"
             };
 
-            QueryConditionToPropertyCriteriaMapper mapper = new QueryConditionToPropertyCriteriaMapper(
+            var mapper = new QueryConditionToPropertyCriteriaMapper(
                 new PropertyDataTypeResolver(new ContentType()));
 
             // Act
-            bool isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria? criteria);
+            var isMapSuccessfull = mapper.TryMap(condition, out PropertyCriteria? criteria);
 
             // Assert
             isMapSuccessfull.Should().BeFalse();
@@ -121,11 +121,11 @@ namespace Cmsql.Optimizely.Test.Internal
         [InlineData(EqualityOperator.NotEquals, CompareCondition.NotEqual)]
         public void Test_can_map_equality_operator_to_compare_condition(EqualityOperator operatr, CompareCondition condition)
         {
-            QueryConditionToPropertyCriteriaMapper mapper =
+            var mapper =
                 new QueryConditionToPropertyCriteriaMapper(
                     new PropertyDataTypeResolver(new ContentType()));
 
-            CompareCondition mappedCondition = QueryConditionToPropertyCriteriaMapper.MapEqualityOperatorToCompareCondition(operatr);
+            var mappedCondition = QueryConditionToPropertyCriteriaMapper.MapEqualityOperatorToCompareCondition(operatr);
 
             mappedCondition.Should().Be(condition);
         }
@@ -133,7 +133,7 @@ namespace Cmsql.Optimizely.Test.Internal
         [Fact]
         public void Test_when_mapping_unknown_equality_operator_throw()
         {
-            QueryConditionToPropertyCriteriaMapper mapper =
+            var mapper =
                 new QueryConditionToPropertyCriteriaMapper(
                     new PropertyDataTypeResolver(new ContentType()));
 
