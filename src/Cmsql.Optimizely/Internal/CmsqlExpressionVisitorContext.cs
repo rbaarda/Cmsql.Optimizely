@@ -21,7 +21,7 @@ namespace Cmsql.Optimizely.Internal
             _propertyCriteriaCollectionStack = new Stack<PropertyCriteriaCollection>();
             _contentType = contentType;
 
-            Errors = new List<CmsqlQueryExecutionError>();
+            Errors = [];
         }
 
         internal void AddPropertyCriteria(PropertyCriteria propertyCriteria)

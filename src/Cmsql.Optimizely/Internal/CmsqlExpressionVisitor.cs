@@ -26,7 +26,7 @@ namespace Cmsql.Optimizely.Internal
                 return;
             }
 
-            if (_conditionToCriteriaMapper.TryMap(condition, out PropertyCriteria? criteria))
+            if (_conditionToCriteriaMapper.TryMap(condition, out var criteria))
             {
                 Context.AddPropertyCriteria(criteria!);
             }

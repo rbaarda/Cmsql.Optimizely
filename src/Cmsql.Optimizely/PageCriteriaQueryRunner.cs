@@ -29,8 +29,7 @@ namespace Cmsql.Optimizely
             var errors = new List<CmsqlQueryExecutionError>();
             var result = new List<PageData>();
 
-            var expressionParser = new CmsqlExpressionParser();
-            foreach (CmsqlQuery query in queries)
+            foreach (var query in queries)
             {
                 var contentType = _contentTypeRepository.Load(query.ContentType);
                 if (contentType == null)
@@ -39,7 +38,7 @@ namespace Cmsql.Optimizely
                     continue;
                 }
 
-                var visitorContext = expressionParser.Parse(contentType, query.Criteria);
+                var visitorContext = CmsqlExpressionParser.Parse(contentType, query.Criteria);
                 if (visitorContext.Errors.Any())
                 {
                     errors.AddRange(visitorContext.Errors);
@@ -58,7 +57,7 @@ namespace Cmsql.Optimizely
                     var foundPages = _pageCriteriaQueryService.FindPagesWithCriteria(
                         searchStartNodeRef,
                         propertyCriteriaCollection);
-                    if (foundPages != null && foundPages.Any())
+                    if (foundPages != null && foundPages.Count != 0)
                     {
                         result.AddRange(foundPages);
                     }
@@ -82,7 +81,7 @@ namespace Cmsql.Optimizely
                 case CmsqlQueryStartNodeType.Root:
                     return ContentReference.RootPage;
                 case CmsqlQueryStartNodeType.Id:
-                    if (int.TryParse(startNode.StartNodeId, out int rootNodeId))
+                    if (int.TryParse(startNode.StartNodeId, out var rootNodeId))
                     {
                         return new PageReference(rootNodeId);
                     }

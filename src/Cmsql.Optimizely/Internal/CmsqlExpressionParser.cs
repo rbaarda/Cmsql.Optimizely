@@ -3,9 +3,9 @@ using EPiServer.DataAbstraction;
 
 namespace Cmsql.Optimizely.Internal
 {
-    internal class CmsqlExpressionParser
+    internal static class CmsqlExpressionParser
     {
-        public CmsqlExpressionVisitorContext Parse(
+        public static CmsqlExpressionVisitorContext Parse(
             ContentType? contentType,
             ICmsqlQueryExpression? expression)
         {

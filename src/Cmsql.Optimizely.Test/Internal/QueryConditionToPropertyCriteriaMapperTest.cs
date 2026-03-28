@@ -140,5 +140,50 @@ namespace Cmsql.Optimizely.Test.Internal
             mapper.Invoking(m => QueryConditionToPropertyCriteriaMapper.MapEqualityOperatorToCompareCondition(EqualityOperator.None))
                 .Should().Throw<InvalidOperationException>();
         }
+
+        [Theory]
+        [InlineData(EqualityOperator.GreaterThanOrEquals)]
+        [InlineData(EqualityOperator.LessThanOrEquals)]
+        public void Test_when_mapping_unsupported_optimizely_operator_throw(EqualityOperator operatr)
+        {
+            var mapper = new QueryConditionToPropertyCriteriaMapper(
+                new PropertyDataTypeResolver(new ContentType()));
+
+            mapper.Invoking(m => QueryConditionToPropertyCriteriaMapper.MapEqualityOperatorToCompareCondition(operatr))
+                .Should().Throw<InvalidOperationException>();
+        }
+
+        [Theory]
+        [InlineData(EqualityOperator.GreaterThanOrEquals)]
+        [InlineData(EqualityOperator.LessThanOrEquals)]
+        public void Test_when_condition_uses_unsupported_optimizely_operator_try_map_returns_false(EqualityOperator operatr)
+        {
+            var contentType = new ContentType
+            {
+                PropertyDefinitions =
+                {
+                    new PropertyDefinition
+                    {
+                        Name = "FooBar",
+                        Type = new PropertyDefinitionType { DataType = PropertyDataType.Number }
+                    }
+                }
+            };
+
+            var condition = new CmsqlQueryCondition
+            {
+                Identifier = "FooBar",
+                Operator = operatr,
+                Value = "5"
+            };
+
+            var mapper = new QueryConditionToPropertyCriteriaMapper(
+                new PropertyDataTypeResolver(contentType));
+
+            var isMapSuccessful = mapper.TryMap(condition, out PropertyCriteria? criteria);
+
+            isMapSuccessful.Should().BeFalse();
+            criteria.Should().BeNull();
+        }
     }
 }

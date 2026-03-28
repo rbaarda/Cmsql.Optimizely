@@ -9,8 +9,8 @@ namespace Cmsql.Optimizely.Internal
 {
     internal class PropertyDataTypeResolver
     {
-        private static readonly IDictionary<string, PropertyDataType>
-            MetaDataPropertyTypeMappings = new Dictionary<string, PropertyDataType>
+        private static readonly Dictionary<string, PropertyDataType>
+            MetaDataPropertyTypeMappings = new()
             {
                 {MetaDataProperties.PageLink, PropertyDataType.PageReference},
                 {MetaDataProperties.PageTypeID, PropertyDataType.PageType},

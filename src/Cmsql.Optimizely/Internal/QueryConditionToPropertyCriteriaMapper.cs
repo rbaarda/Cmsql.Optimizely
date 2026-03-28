@@ -1,8 +1,7 @@
-﻿using System;
-using Cmsql.Query;
+﻿using Cmsql.Query;
 using EPiServer;
-using EPiServer.Core;
 using EPiServer.Filters;
+using System;
 
 namespace Cmsql.Optimizely.Internal
 {
@@ -24,7 +23,7 @@ namespace Cmsql.Optimizely.Internal
                 return false;
             }
 
-            if (!_propertyDataTypeResolver.TryResolve(condition.Identifier, out PropertyDataType propertyDataType))
+            if (!_propertyDataTypeResolver.TryResolve(condition.Identifier, out var propertyDataType))
             {
                 return false;
             }
