@@ -12,11 +12,8 @@ namespace Cmsql.Optimizely.Test.Internal
         [Fact]
         public void Test_when_content_type_is_null_result_should_have_no_criteria()
         {
-            // Arrange
-            var parser = new CmsqlExpressionParser();
-
             // Act
-            var context = parser.Parse(null!, null!);
+            var context = CmsqlExpressionParser.Parse(null!, null!);
 
             // Assert
             context.GetCriteria().Should().BeEmpty();
@@ -27,11 +24,10 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_when_expression_is_null_result_should_have_one_criteria_collection()
         {
             // Arrange
-            var parser = new CmsqlExpressionParser();
             var contentType = new ContentType { ID = 1 };
 
             // Act
-            var context = parser.Parse(contentType, null!);
+            var context = CmsqlExpressionParser.Parse(contentType, null!);
 
             // Assert
             context.GetCriteria().Should().HaveCount(1);
@@ -42,7 +38,6 @@ namespace Cmsql.Optimizely.Test.Internal
         public void Test_when_expression_is_valid_result_should_contain_mapped_criteria()
         {
             // Arrange
-            var parser = new CmsqlExpressionParser();
             var contentType = new ContentType { ID = 1 };
             var expression = new CmsqlQueryCondition
             {
@@ -52,7 +47,7 @@ namespace Cmsql.Optimizely.Test.Internal
             };
 
             // Act
-            var context = parser.Parse(contentType, expression);
+            var context = CmsqlExpressionParser.Parse(contentType, expression);
 
             // Assert
             context.Errors.Should().BeEmpty();
