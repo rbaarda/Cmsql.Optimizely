@@ -19,9 +19,9 @@ The following (Optimizely CMS specific) example demonstrates how to execute a qu
 
 ```csharp
 var resultSet = _cmsqlQueryService.ExecuteQuery("select ProductPage from start where PageName = 'Alloy Plan'");
-if (!resultSet.ParseResult.Errors.Any() && !resultSet.ExecutionResult.Errors.Any())
+if (resultSet.IsSuccess)
 {
-  var pages = resultSet.ExecutionResult.QueryResults
+  var pages = resultSet.GetResults()
     .OfType<PageDataCmsqlQueryResult>()
     .Select(p => p.Page)
     .ToList();
