@@ -28,8 +28,7 @@ if (resultSet.IsSuccess)
 }
 ```
 ### Setup
-The `CmsqlQueryService` needs to be given an instance of a `ICmsqlQueryRunner` through its constructor when instantiated. The specific `ICmsqlQueryRunner` implementation for this package is `PageCriteriaQueryRunner`. You are free to set this up yourself by for example StructureMap, this could look something like the following in your StructureMap configuration:
-`x.For<ICmsqlQueryRunner>().Use<PageCriteriaQueryRunner>();`
+The `CmsqlQueryService` needs to be given an instance of a `ICmsqlQueryRunner` through its constructor when instantiated. The specific `ICmsqlQueryRunner` implementation for this package is `PageCriteriaQueryRunner`. You are free to set this up yourself in your DI container.
 
 ## Limitations
 Since the Cmsql.Optimizely package revolves around the `IPageCriteriaQueryService` it is also limited by it. For now, querying is limited to Pages (PageData) only, and one PageType per query.
