@@ -8,7 +8,7 @@ This is the [Optimizely CMS](https://www.optimizely.com/products/content-managem
 ### Installation
 You can install the NuGet package by running the following command:
 
-`dotnet add package Cmsql.Optimizely --version 1.0.0`
+`dotnet add package Cmsql.Optimizely --version 1.1.0`
 
 ### Usage
 The Cmsql package contains a `CmsqlQueryService` which is basically a facade that takes care of parsing and executing queries through the `ExecuteQuery` method.
